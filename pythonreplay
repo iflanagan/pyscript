@@ -1,0 +1,50 @@
+#!/bin/bash 
+
+# define variables
+myDelay =5
+myTest=http://127.0.0.1:8000/age_verification/?birthdate=
+myDate=19000504
+myDateNew=1900050
+
+echo "Starting the generate data for the python Demo."
+sleep $myDelay
+
+
+
+function runCurlCommand() {
+
+# curl --request GET 'http://127.0.0.1:8000/age_verification/?birthdate=19000504' 
+
+curl --request GET 'http://127.0.0.1:8000/age_verification/?birthdate=$myDate' \
+--header 'Sec-Fetch-User:?1' \
+--header 'Accept-Language:en-US,en;q=0.9' \
+--header 'Accept-Encoding:gzip, deflate, br' \
+--header 'Sec-Fetch-Site:none' \
+--header 'Host:127.0.0.1:8000' \
+--header 'Sec-Fetch-Mode:navigate' \
+--header 'User-Agent:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36' \
+--header 'Connection:keep-alive' \
+--header 'Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9' \
+--header 'Upgrade-Insecure-Requests:1' \
+--header 'Sec-Fetch-Dest:document'
+
+
+}
+
+function generateErrors() {
+
+for i in {1..30}
+do
+   echo "Generate data for Python Demo $i times"
+   echo "Value is " $myDateNew$i
+   myDate = $myDateNew$i
+   runCurlCommand
+   sleep 1 
+
+done
+
+} 
+
+#runCurlCommand
+generateErrors
+
